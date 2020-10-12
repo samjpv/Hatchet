@@ -60,6 +60,7 @@ def neweggnav(productName):
 
 def bestbuynav(productName):
     # get personal info
+    print("**The below information will be used to fill in site order forms and will not be recorded anywhere**")
     email = input("User email: ")
     phone = input("User phone: ")
     ccn = input("User ccn: ")
