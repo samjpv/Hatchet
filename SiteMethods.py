@@ -12,7 +12,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 
-PATH = "chromedriver.exe"
+PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 
