@@ -15,4 +15,6 @@ class WebsiteObject:
         elif sitename == Sites.BESTBUY:
             self.siteurl = "https://bestbuy.com"
             self.products = [Product("aorus master", "GV-N3080AORUS M-10GD", "RTX 3080"),
-                             Product("evga 2060", "06G-P4-2068-KB", "RTX 2060")]
+                             Product("evga 2060", "06G-P4-2068-KB", "RTX 2060"),
+                             Product("asus rog strix", "ROG-STRIX-RTX3080-O10G-GAMING", "RTX 3080"),
+                             Product("evga ftw3", "10G-P5-3897-KR", "RTX 3080")]
