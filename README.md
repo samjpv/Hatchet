@@ -18,7 +18,7 @@ state: CA<br/>
 zipcode: 11111<br/>
 #### * The file must be formatted the same as the example, including line breaks and spacing.
 #### * More sensitive information will be prompted by the program at runtime.<br/>
-### Running the program
+### Run the program
 #### For windows, locate and execute the Hatchet.bat file. For 
 #### unix systems, locate and execute the Hatchet.sh file.
 #### 1. Upon launch, the program will prompt the user for information pertinent to the checkout process, the desired site refresh rate, as well as the site of purchase and the url from which the user would like to purchase a product.<br/>
