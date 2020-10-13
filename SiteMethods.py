@@ -15,8 +15,14 @@ driver = webdriver.Chrome(PATH)
 
 def bestbuy(productUrl, refreshrate):
     # get personal info
-    userinfopath = open("InfoFilePath.txt", "r").read()
-    userinfofile = open(glob.glob(userinfopath)[0], "r").read()
+    try:
+        userinfopath = open("InfoFilePath.txt", "r").read()
+        userinfofile = open(glob.glob(userinfopath)[0], "r").read()
+    except Exception:
+        print("There was a problem with your user information file. Check that you have the correct path to your info "
+              "file in InfoFilePath.txt and check that your user info file is formatted according to readme "
+              "specifications, then run the program again.")
+        exit(-1)
     userinfoarray = userinfofile.split('\n')
     userinfo = {}
     for field in userinfoarray:
