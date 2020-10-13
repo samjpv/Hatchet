@@ -13,7 +13,7 @@ def main():
     if site == Constants.Sites.BESTBUY.value:
         SiteMethods.bestbuy(producturl, refreshrate)
     else:
-        print("Please enter a valid site title")
+        print("Site title was not valid. Please try again.")
         main()
 
 
