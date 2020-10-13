@@ -3,11 +3,15 @@
 import glob
 import os
 import time
+from telnetlib import EC
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
 
 PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
@@ -89,5 +93,5 @@ def bestbuy(productUrl, refreshrate):
     driver.find_element_by_id("payment.billingAddress.city").send_keys(city)
     Select(driver.find_element_by_name("state")).select_by_visible_text(state)
     driver.find_element_by_id("payment.billingAddress.zipcode").send_keys(zipcode)
-    driver.find_element_by_class_name("btn-lg").click()
+    # driver.find_element_by_class_name("btn-lg").click()
 
