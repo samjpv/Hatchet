@@ -1,4 +1,6 @@
 # Hatchet
+## About
+#### This is a Selenium bot designed with the long-term goal of being able to access product pages on various etailer sites and passively poll for stock availability, purchasing the desired product once it becomes available. In particular, this bot is meant to give easier to access to products during a period of stock scarcity, or a limited quantity launch.
 ## Prerequisites
 #### -Must have chrome Version 86.*<br/>
 #### -Must have Python 3.* installed<br/>
