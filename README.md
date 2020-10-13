@@ -1,6 +1,6 @@
 # Hatchet
 ## Prerequisites
-#### -Must have chrome version Version 86.*<br/>
+#### -Must have chrome Version 86.*<br/>
 #### -Must have Python 3.* installed<br/>
 ## Usage
 ### Set up information for purchasing
