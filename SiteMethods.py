@@ -40,7 +40,11 @@ def bestbuy(productUrl, refreshrate):
     print("Navigating to product page . . .")
 
     # open site
-    driver.get(productUrl)
+    try:
+        driver.get(productUrl)
+    except Exception:
+        print(">The site URL you entered was not valid. Please restart the program and try again.<")
+        exit(-1)
 
     # try to add to cart
     while True:
