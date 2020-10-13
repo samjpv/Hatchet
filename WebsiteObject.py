@@ -1,4 +1,3 @@
-from Product import Product
 from Constants import Sites
 
 
