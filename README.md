@@ -17,7 +17,8 @@ zipcode: 11111<br/>
 #### * The file must be formatted the same as the example, including line breaks and spacing.
 #### * More sensitive information will be prompted by the program at runtime.<br/>
 ### Running the program
-#### Locate the Hatchet.sh shell script in the repository and run it (currently only support for linux)
+#### For windows, locate and execute the Hatchet.bat file. For 
+#### unix systems, locate and execute the Hatchet.sh file.
 #### 1. Upon launch, the program will prompt the user for information pertinent to the checkout process, the desired site refresh rate, as well as the site of purchase and the url from which the user would like to purchase a product.<br/>
 #### 2. It will then open google chrome and navigate to the site that the user has entered. Note that if the url does not belong to the same origin domain as the site of purchase, the program will not function properly.<br/>
 #### 3. Finally, the program will passively refresh the product page at a rate corresponding to that inputted by the user, and will purchase the product if/when the 'Add to cart' button becomes active.<br/>
