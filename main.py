@@ -9,7 +9,7 @@ def main():
     site = input("Which site would you like to use?:\n").lower()
     producturl = input("Please enter the URL of the product you would like to purchase:\n (must belong to inputted "
                        "site)\n")
-    refreshrate = input("How often would you like to refresh the site in seconds?:\n")
+    refreshrate = int(input("How often would you like to refresh the site in seconds?:\n"))
     if site == Constants.Sites.BESTBUY.value:
         SiteMethods.bestbuy(producturl, refreshrate)
 
