@@ -12,6 +12,9 @@ def main():
     refreshrate = int(input("How often would you like to refresh the site in seconds?:\n"))
     if site == Constants.Sites.BESTBUY.value:
         SiteMethods.bestbuy(producturl, refreshrate)
+    else:
+        print("Please enter a valid site title")
+        main()
 
 
 if __name__ == '__main__':
