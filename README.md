@@ -11,5 +11,11 @@ address: 1 helloworld street<br/>
 city: flavortown<br/>
 state: CA<br/>
 zipcode: 11111<br/>
-#### * More sensitive information will be prompted by the program at runtime.
+#### * The file must be formatted the same as the example, including line breaks and spacing.
+#### * More sensitive information will be prompted by the program at runtime.<br/>
+### Running the program
+#### Upon launch, the program will prompt the user for information pertinent to the checkout process, the desired site refresh rate, as well as the site of purchase and the url from which the user would like to purchase a product.<br/>
+It will then open google chrome and navigate to the site that the user has entered. Note that if the url does not belong to the same origin domain as the site of purchase, the program will not function properly.<br/>
+Finally, the program will passively refresh the program at a rate corresponding to that inputted by the user, and will purchase the product if/when the 'Add to cart' button becomes active.<br/>
+
 
