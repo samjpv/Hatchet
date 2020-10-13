@@ -1,13 +1,10 @@
 # install selenium
 # install chromedriver and copy executable to C:/Program Files (x86)
-
+import glob
 import os
 import time
 
 from selenium.webdriver.support.select import Select
-
-from Constants import Sites
-from WebsiteObject import WebsiteObject
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
@@ -18,20 +15,28 @@ driver = webdriver.Chrome(PATH)
 
 def bestbuy(productUrl, refreshrate):
     # get personal info
-    print("**The below information will be used to fill in site order forms and will not be recorded anywhere**")
-    print("Values are not case sensitive unless stated otherwise")
-    email = input("User email: ")
-    phone = input("User phone (no dashes): ")
+    userinfopath = open("InfoFilePath.txt", "r").read()
+    userinfofile = open(glob.glob(userinfopath)[0], "r").read()
+    userinfoarray = userinfofile.split('\n')
+    userinfo = {}
+    for field in userinfoarray:
+        values = field.split(': ')
+        fieldname = values[0]
+        fieldvalue = values[1]
+        userinfo[fieldname] = fieldvalue
+    email = userinfo['email']
+    phone = userinfo['phone']
+    firstname = userinfo['firstname']
+    lastname = userinfo['lastname']
+    address = userinfo['address']
+    city = userinfo['city']
+    state = userinfo['state'].upper()
+    zipcode = userinfo['zipcode']
     ccn = input("User ccn: ")
     cvv = input("User cvv: ")
     ccexpirationyear = input("User cc expiration year, e.g. 2020: ")
     ccexpirationmonth = input("User cc expiration month, e.g. 01: ")
-    firstname = input("First name: ")
-    lastname = input("Last name: ")
-    address = input("Address: ")
-    city = input("City: ")
-    state = input("State abbreviation (capitalized): ")
-    zipcode = input("Zip code: ")
+
     print("Navigating to product page . . .")
 
     # open site
