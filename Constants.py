@@ -1,4 +1,5 @@
 from enum import Enum
+from selenium import webdriver
 
 
 class Sites(Enum):
@@ -7,3 +8,5 @@ class Sites(Enum):
 
 
 userinfo = {}
+PATH = "./chromedriver.exe"
+driver = webdriver.Chrome(PATH)

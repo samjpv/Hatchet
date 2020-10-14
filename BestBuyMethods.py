@@ -11,19 +11,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-PATH = "./chromedriver.exe"
-driver = webdriver.Chrome(PATH)
-
-
-# driver.maximize_window()
-
+driver = Constants.driver
 
 def waitforbutton(buttonclass):
     timeout = 5
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, buttonclass))
-        WebDriverWait(driver, timeout).until(element_present)
+        WebDriverWait(Constants.driver, timeout).until(element_present)
     except TimeoutException:
         print(f"Page html did not load after {timeout} seconds. . .")
     driver.find_element_by_class_name(buttonclass).click()

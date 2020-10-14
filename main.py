@@ -1,5 +1,7 @@
 import Constants
 import BestBuyMethods
+import NeweggMethods
+
 
 
 def main():
@@ -12,6 +14,8 @@ def main():
     refreshrate = int(input("How often would you like to refresh the site in seconds?:\n"))
     if site == Constants.Sites.BESTBUY.value:
         BestBuyMethods.bestbuy(producturl, refreshrate)
+    elif site == Constants.Sites.NEWEGG.value:
+        NeweggMethods.newegg(producturl, refreshrate)
     else:
         print(">Site title was not valid. Please try again.<")
         main()
