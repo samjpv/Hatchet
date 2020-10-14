@@ -1,6 +1,7 @@
 import glob
 import Constants
 
+
 def setuserinfo():
     try:
         userinfopath = open("InfoFilePath.txt", "r").read()
@@ -20,4 +21,3 @@ def setuserinfo():
     Constants.userinfo["cvv"] = input("User cvv: ")
     Constants.userinfo["ccexpirationmonth"] = input("User cc expiration month, e.g. 01: ")
     Constants.userinfo["ccexpirationyear"] = input("User cc expiration year, e.g. 2020: ")
-

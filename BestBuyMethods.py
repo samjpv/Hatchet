@@ -1,7 +1,7 @@
 # install selenium
 # install chromedriver and copy executable to C:/Program Files (x86)
 import time
-import js2py
+import Constants
 import CommonMethods
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -12,21 +12,42 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import Constants
-
 PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 
-def waitforbutton(elementxpath):
+# driver.maximize_window()
+
+
+def waitforbutton(buttonclass):
     timeout = 5
     try:
-        element_present = EC.presence_of_element_located((By.XPATH, elementxpath))
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, buttonclass))
         WebDriverWait(driver, timeout).until(element_present)
     except TimeoutException:
         print(f"Page html did not load after {timeout} seconds. . .")
-    time.sleep(0.5)
-    driver.find_element_by_xpath(elementxpath).find_element_by_xpath('../..').click()
+    driver.find_element_by_class_name(buttonclass).click()
+
+
+def waitforfield(fieldid, fieldvalue):
+    timeout = 5
+    try:
+        element_present = EC.presence_of_element_located((By.ID, fieldid))
+        WebDriverWait(driver, timeout).until(element_present)
+    except TimeoutException:
+        print(f"Page html did not load after {timeout} seconds. . .")
+    driver.find_element_by_id(fieldid).send_keys(fieldvalue)
+
+
+def waitfordropdown(dropdownname, dropdownvalue):
+    timeout = 5
+    try:
+        element_present = EC.presence_of_element_located((By.NAME, dropdownname))
+        WebDriverWait(driver, timeout).until(element_present)
+    except TimeoutException:
+        print(f"Page html did not load after {timeout} seconds. . .")
+    Select(driver.find_element_by_name(dropdownname)).select_by_visible_text(
+        dropdownvalue)
 
 
 def bestbuy(productUrl, refreshrate):
@@ -54,30 +75,22 @@ def bestbuy(productUrl, refreshrate):
     # checkout
     time.sleep(2)
     driver.get("https://www.bestbuy.com/cart")
-
-    checkoutxpath = "//*[text()[contains(., \'Checkout\')]]"
-    waitforbutton(checkoutxpath)
-
-    time.sleep(2)
-    driver.find_element_by_class_name("js-cia-guest-button").click()
-    time.sleep(2)
+    time.sleep(1)
+    waitforbutton('btn-lg')
+    waitforbutton('js-cia-guest-button')
 
     # fill in payment info
-    # email, phone, and cc have to be exported locally as environment variables
-    driver.find_element_by_id("user.emailAddress").send_keys(Constants.userinfo["email"])
-    driver.find_element_by_id("user.phone").send_keys(Constants.userinfo["phone"])
+    waitforfield("user.emailAddress", Constants.userinfo["email"])
+    waitforfield("user.phone", Constants.userinfo["phone"])
     driver.find_element_by_class_name("btn-secondary").click()
-    time.sleep(2)
-    driver.find_element_by_id("optimized-cc-card-number").send_keys(Constants.userinfo["ccn"])
-    time.sleep(1)
-    Select(driver.find_element_by_name("expiration-year")).select_by_visible_text(Constants.userinfo["ccexpirationyear"])
-    Select(driver.find_element_by_name("expiration-month")).select_by_visible_text(Constants.userinfo["ccexpirationmonth"])
-    driver.find_element_by_id("credit-card-cvv").send_keys(Constants.userinfo["cvv"])
-    driver.find_element_by_id("payment.billingAddress.firstName").send_keys(Constants.userinfo["firstname"])
-    driver.find_element_by_id("payment.billingAddress.lastName").send_keys(Constants.userinfo["lastname"])
+    waitforfield("optimized-cc-card-number", Constants.userinfo["ccn"])
+    waitfordropdown("expiration-year", Constants.userinfo["ccexpirationyear"])
+    waitfordropdown("expiration-month", Constants.userinfo["ccexpirationmonth"])
+    waitforfield("credit-card-cvv", Constants.userinfo["cvv"])
+    waitforfield("payment.billingAddress.firstName", Constants.userinfo["firstname"])
+    waitforfield("payment.billingAddress.lastName", Constants.userinfo["lastname"])
     driver.find_element_by_class_name("autocomplete__toggle").click()
-    driver.find_element_by_id("payment.billingAddress.street").send_keys(Constants.userinfo["address"])
-    driver.find_element_by_id("payment.billingAddress.city").send_keys(Constants.userinfo["city"])
-    Select(driver.find_element_by_name("state")).select_by_visible_text(Constants.userinfo["state"])
-    driver.find_element_by_id("payment.billingAddress.zipcode").send_keys(Constants.userinfo["zipcode"])
-    # driver.find_element_by_class_name("btn-lg").click()
+    waitforfield("payment.billingAddress.street", Constants.userinfo["address"])
+    waitforfield("payment.billingAddress.city", Constants.userinfo["city"])
+    waitfordropdown("state", Constants.userinfo["state"])
+    waitforfield("payment.billingAddress.zipcode", Constants.userinfo["zipcode"])
