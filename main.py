@@ -1,5 +1,5 @@
 import Constants
-import SiteMethods
+import BestBuyMethods
 
 
 def main():
@@ -11,7 +11,7 @@ def main():
                        "site)\n")
     refreshrate = int(input("How often would you like to refresh the site in seconds?:\n"))
     if site == Constants.Sites.BESTBUY.value:
-        SiteMethods.bestbuy(producturl, refreshrate)
+        BestBuyMethods.bestbuy(producturl, refreshrate)
     else:
         print(">Site title was not valid. Please try again.<")
         main()
