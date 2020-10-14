@@ -94,3 +94,4 @@ def bestbuy(productUrl, refreshrate):
     waitforfield("payment.billingAddress.city", Constants.userinfo["city"])
     waitfordropdown("state", Constants.userinfo["state"])
     waitforfield("payment.billingAddress.zipcode", Constants.userinfo["zipcode"])
+    driver.find_element_by_class_name("btn-lg").click()
