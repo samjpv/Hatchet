@@ -3,7 +3,6 @@ import json
 import time
 
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -70,9 +69,6 @@ def waitfordropdown_byname(dropdownname, dropdownvalue):
 
 
 def send(driver, cmd, params={}):
-    """
-    Send command to chromium driver
-    """
     resource = "/session/%s/chromium/send_command_and_get_result" % driver.session_id
     url = driver.command_executor._url + resource
     body = json.dumps({'cmd': cmd, 'params': params})
@@ -83,10 +79,6 @@ def send(driver, cmd, params={}):
 
 
 def add_script(driver, script):
-    """
-    Inject script before loading page
-    Cf: https://stackoverflow.com/a/47298910
-    """
     send(driver, "Page.addScriptToEvaluateOnNewDocument", {"source": script})
 
 
@@ -99,11 +91,8 @@ def process(driver):
 
 
 def init_webdriver():
-    """
-    Init selnium web driver for scraping website
-    """
     WebDriver.add_script = add_script
-    options = Options()
+    options = webdriver.ChromeOptions()
     ua = UserAgent()
     userAgent = ua.random
     options.add_argument(f'user-agent={userAgent}')
