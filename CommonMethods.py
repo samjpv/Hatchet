@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from fake_useragent import UserAgent
-
+import zipfile
 import Constants
 
 
@@ -84,7 +84,8 @@ def add_script(driver, script):
 
 def process(driver):
     driver.add_script(
-        'const setProperty = () => {     Object.defineProperty(navigator, "webdriver", {       get: () => false,     }); }; setProperty();')
+        'const setProperty = () => {     Object.defineProperty(navigator, "webdriver", {       get: () => false,     '
+        '}); }; setProperty();')
     # load a page
     driver.get('example.com')
     time.sleep(20)
@@ -96,7 +97,10 @@ def init_webdriver():
     ua = UserAgent()
     userAgent = ua.random
     options.add_argument(f'user-agent={userAgent}')
+    options.add_extension('./extension1.zip')
+    options.add_extension('./extension2.zip')
     driver = webdriver.Chrome(executable_path=Constants.PATH, chrome_options=options)
+
     return driver
 
 
