@@ -3,45 +3,8 @@
 import time
 import Constants
 import CommonMethods
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.select import Select
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 driver = Constants.driver
-
-def waitforbutton(buttonclass):
-    timeout = 5
-    try:
-        element_present = EC.presence_of_element_located((By.CLASS_NAME, buttonclass))
-        WebDriverWait(Constants.driver, timeout).until(element_present)
-    except TimeoutException:
-        print(f"Page html did not load after {timeout} seconds. . .")
-    driver.find_element_by_class_name(buttonclass).click()
-
-
-def waitforfield(fieldid, fieldvalue):
-    timeout = 5
-    try:
-        element_present = EC.presence_of_element_located((By.ID, fieldid))
-        WebDriverWait(driver, timeout).until(element_present)
-    except TimeoutException:
-        print(f"Page html did not load after {timeout} seconds. . .")
-    driver.find_element_by_id(fieldid).send_keys(fieldvalue)
-
-
-def waitfordropdown(dropdownname, dropdownvalue):
-    timeout = 5
-    try:
-        element_present = EC.presence_of_element_located((By.NAME, dropdownname))
-        WebDriverWait(driver, timeout).until(element_present)
-    except TimeoutException:
-        print(f"Page html did not load after {timeout} seconds. . .")
-    Select(driver.find_element_by_name(dropdownname)).select_by_visible_text(
-        dropdownvalue)
 
 
 def bestbuy(productUrl, refreshrate):
@@ -70,22 +33,22 @@ def bestbuy(productUrl, refreshrate):
     time.sleep(2)
     driver.get("https://www.bestbuy.com/cart")
     time.sleep(1)
-    waitforbutton('btn-lg')
-    waitforbutton('js-cia-guest-button')
+    CommonMethods.waitforbutton_byclass('btn-lg')
+    CommonMethods.waitforbutton_byclass('js-cia-guest-button')
 
     # fill in payment info
-    waitforfield("user.emailAddress", Constants.userinfo["email"])
-    waitforfield("user.phone", Constants.userinfo["phone"])
+    CommonMethods.waitforfield_byid("user.emailAddress", Constants.userinfo["email"])
+    CommonMethods.waitforfield_byid("user.phone", Constants.userinfo["phone"])
     driver.find_element_by_class_name("btn-secondary").click()
-    waitforfield("optimized-cc-card-number", Constants.userinfo["ccn"])
-    waitfordropdown("expiration-year", Constants.userinfo["ccexpirationyear"])
-    waitfordropdown("expiration-month", Constants.userinfo["ccexpirationmonth"])
-    waitforfield("credit-card-cvv", Constants.userinfo["cvv"])
-    waitforfield("payment.billingAddress.firstName", Constants.userinfo["firstname"])
-    waitforfield("payment.billingAddress.lastName", Constants.userinfo["lastname"])
+    CommonMethods.waitforfield_byid("optimized-cc-card-number", Constants.userinfo["ccn"])
+    CommonMethods.waitfordropdown_byname("expiration-year", Constants.userinfo["ccexpirationyear"])
+    CommonMethods.waitfordropdown_byname("expiration-month", Constants.userinfo["ccexpirationmonth"])
+    CommonMethods.waitforfield_byid("credit-card-cvv", Constants.userinfo["cvv"])
+    CommonMethods.waitforfield_byid("payment.billingAddress.firstName", Constants.userinfo["firstname"])
+    CommonMethods.waitforfield_byid("payment.billingAddress.lastName", Constants.userinfo["lastname"])
     driver.find_element_by_class_name("autocomplete__toggle").click()
-    waitforfield("payment.billingAddress.street", Constants.userinfo["address"])
-    waitforfield("payment.billingAddress.city", Constants.userinfo["city"])
-    waitfordropdown("state", Constants.userinfo["state"])
-    waitforfield("payment.billingAddress.zipcode", Constants.userinfo["zipcode"])
+    CommonMethods.waitforfield_byid("payment.billingAddress.street", Constants.userinfo["address"])
+    CommonMethods.waitforfield_byid("payment.billingAddress.city", Constants.userinfo["city"])
+    CommonMethods.waitfordropdown_byname("state", Constants.userinfo["state"])
+    CommonMethods.waitforfield_byid("payment.billingAddress.zipcode", Constants.userinfo["zipcode"])
     driver.find_element_by_class_name("btn-lg").click()
