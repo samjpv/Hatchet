@@ -3,12 +3,14 @@ import json
 import time
 
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+from fake_useragent import UserAgent
 
 import Constants
 
@@ -101,7 +103,10 @@ def init_webdriver():
     Init selnium web driver for scraping website
     """
     WebDriver.add_script = add_script
-    options = webdriver.ChromeOptions()
+    options = Options()
+    ua = UserAgent()
+    userAgent = ua.random
+    options.add_argument(f'user-agent={userAgent}')
     driver = webdriver.Chrome(executable_path=Constants.PATH, chrome_options=options)
     return driver
 
