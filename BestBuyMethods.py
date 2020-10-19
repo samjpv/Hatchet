@@ -4,7 +4,7 @@ import time
 import Constants
 import CommonMethods
 
-driver = Constants.driver
+driver = CommonMethods.driver
 
 
 def bestbuy(productUrl, refreshrate):

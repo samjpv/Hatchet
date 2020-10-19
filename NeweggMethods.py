@@ -1,18 +1,10 @@
 # install selenium
 # install chromedriver and copy executable to C:/Program Files (x86)
 import time
-import Constants
 import CommonMethods
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.select import Select
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 
-driver = Constants.driver
+driver = CommonMethods.driver
 
 
 def tryclosepopup(popupid):

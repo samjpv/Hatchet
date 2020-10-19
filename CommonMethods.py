@@ -1,14 +1,19 @@
 import glob
+import json
+import time
 
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
 
 import Constants
 
-driver = Constants.driver
 
+# driver = Constants.driver
 
 def setuserinfo():
     try:
@@ -35,7 +40,7 @@ def waitforbutton_byclass(buttonclass):
     timeout = 5
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, buttonclass))
-        WebDriverWait(Constants.driver, timeout).until(element_present)
+        WebDriverWait(driver, timeout).until(element_present)
     except TimeoutException:
         print(f"Page html did not load after {timeout} seconds. . .")
     driver.find_element_by_class_name(buttonclass).click()
@@ -60,3 +65,45 @@ def waitfordropdown_byname(dropdownname, dropdownvalue):
         print(f"Page html did not load after {timeout} seconds. . .")
     Select(driver.find_element_by_name(dropdownname)).select_by_visible_text(
         dropdownvalue)
+
+
+def send(driver, cmd, params={}):
+    """
+    Send command to chromium driver
+    """
+    resource = "/session/%s/chromium/send_command_and_get_result" % driver.session_id
+    url = driver.command_executor._url + resource
+    body = json.dumps({'cmd': cmd, 'params': params})
+    response = driver.command_executor._request('POST', url, body)
+    if response['status']:
+        raise Exception(response.get('value'))
+    return response.get('value')
+
+
+def add_script(driver, script):
+    """
+    Inject script before loading page
+    Cf: https://stackoverflow.com/a/47298910
+    """
+    send(driver, "Page.addScriptToEvaluateOnNewDocument", {"source": script})
+
+
+def process(driver):
+    driver.add_script(
+        'const setProperty = () => {     Object.defineProperty(navigator, "webdriver", {       get: () => false,     }); }; setProperty();')
+    # load a page
+    driver.get('example.com')
+    time.sleep(20)
+
+
+def init_webdriver():
+    """
+    Init selnium web driver for scraping website
+    """
+    WebDriver.add_script = add_script
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(executable_path=Constants.PATH, chrome_options=options)
+    return driver
+
+
+driver = init_webdriver()
