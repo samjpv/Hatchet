@@ -1,2 +1,2 @@
-py -m pip-install selenium
+pip3 install selenium
 py main.py

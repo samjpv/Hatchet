@@ -9,7 +9,6 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-from fake_useragent import UserAgent
 import Constants
 
 
@@ -93,9 +92,6 @@ def process(driver):
 def init_webdriver():
     WebDriver.add_script = add_script
     options = webdriver.ChromeOptions()
-    ua = UserAgent()
-    userAgent = ua.random
-    options.add_argument(f"user-agent={userAgent}")
     options.add_argument("--lang=en-us")
     options.add_argument("start-maximized")
     options.add_argument("disable-infobars")
