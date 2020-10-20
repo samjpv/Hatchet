@@ -10,7 +10,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from fake_useragent import UserAgent
-import zipfile
 import Constants
 
 
@@ -96,11 +95,13 @@ def init_webdriver():
     options = webdriver.ChromeOptions()
     ua = UserAgent()
     userAgent = ua.random
-    options.add_argument(f'user-agent={userAgent}')
+    options.add_argument(f"user-agent={userAgent}")
+    options.add_argument("--lang=en-us")
+    options.add_argument("start-maximized")
+    options.add_argument("disable-infobars")
     options.add_extension('./extension1.zip')
     options.add_extension('./extension2.zip')
     driver = webdriver.Chrome(executable_path=Constants.PATH, chrome_options=options)
-
     return driver
 
 

@@ -8,4 +8,3 @@ class Sites(Enum):
 
 userinfo = {}
 PATH = "./chromedriver.exe"
-#driver = webdriver.Chrome(PATH)
