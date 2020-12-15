@@ -34,7 +34,7 @@ def bestbuy(productUrl, refreshrate):
     driver.get("https://www.bestbuy.com/cart")
     time.sleep(1)
     CommonMethods.waitforbutton_byclass('btn-lg')
-    CommonMethods.waitforbutton_byclass('js-cia-guest-button')
+    CommonMethods.waitforbutton_byclass('cia-guest-content__continue')
 
     # fill in payment info
     CommonMethods.waitforfield_byid("user.emailAddress", Constants.userinfo["email"])
